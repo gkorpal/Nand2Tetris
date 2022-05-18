@@ -1,7 +1,9 @@
 # Nand2Tetris
 
 Platform: Fedora Linux 36 (Workstation Edition) 
+
 Java (OpenJDK): `sudo dnf install java-17-openjdk-17.0.3.0.7-1.fc36.x86_64`
+
 Create symbolic links for the software tools:
 ````
 $ mkdir ~/bin
