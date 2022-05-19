@@ -1,5 +1,7 @@
 # Nand2Tetris
 
+![nand2tetris](nand2tetris.png)
+
 Platform: Fedora Linux 36 (Workstation Edition) with GNOME Wayland
 
 Java (OpenJDK): `sudo dnf install java-17-openjdk-17.0.3.0.7-1.fc36.x86_64`
