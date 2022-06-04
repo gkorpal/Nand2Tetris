@@ -1,1 +1,3 @@
-No dependencies used.
+Built-in: assembler, ROM, RAM, registers A and D, program counter PC, ALU.
+
+No inter-dependencies.
