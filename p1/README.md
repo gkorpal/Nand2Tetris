@@ -16,3 +16,6 @@ Nand built-in
     │   │       └── DMux8Way.hdl
     │   └── And16.hdl
     └── Not16.hdl
+
+The utility of Mux (taken from the slides on the website):
+![mux](/p1/mux.png)
