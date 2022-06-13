@@ -1,1 +1,6 @@
-d
+Dependency tree:
+
+Screen/Keyboard/ARegister/DRegister/ROM32K built-in
+├── Memory.hdl
+└── CPU.hdl
+    └── Computer.hdl
