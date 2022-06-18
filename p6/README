@@ -1,0 +1,14 @@
+Dependency tree:
+
+HackAssembler
+└── assembler.py
+    ├── symboltable.py
+    ├── parser.py
+    └── code.py
+    
+$ cd HackAssembler
+$ chmod +x *
+$ ./assembler.py ../add
+$ ./assembler.py ../max
+$ ./assembler.py ../rect
+$ ./assembler.py ../pong
