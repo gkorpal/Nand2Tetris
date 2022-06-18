@@ -21,3 +21,7 @@ $ chmod +x Assembler
 $ ln -s ~/nand2tetris/tools/JackCompiler.sh JackCompiler
 $ chmod +x JackCompiler
 ````
+
+The Hack computer is based on Harvard architecture (two separate address spaces), unlike most multi-purpose computers based on von Neumann architecture (single address space for storing both programs and data).
+
+The Jack language is based on Java (statically-typed object-oriented with two-tier compilation) but the compiler is written in Python (dynamically-typed interpreted). Even though both Java and Python generate bytecode, they are [quite different](https://stackoverflow.com/a/1732383/6687333).
