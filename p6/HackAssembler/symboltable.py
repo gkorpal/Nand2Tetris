@@ -9,13 +9,15 @@ and their meanings (RAM and ROM addresses)
 
 class SymbolTable:
     DEFAULT_START_MEM_ADDR = 16
-    """    
-    Note that the __init__ method lets the class initialize the object's
-    attributes. The __init__() function is called automatically every time the 
-    class is being used to create a new object.
-    https://docs.python.org/3/tutorial/classes.html#class-objects
-    """
+
     def __init__(self) -> None:
+        """
+        The assembler creates a symbol table and initializes it with 
+        all the predefined symbols and their pre-allocated values.
+        The predefined symbols of Hack assembly programs (section 6.2.2).
+        Also, the variable symbols are mapped to consecutive RAM locations 
+        as they are first encountered, starting at RAM address 16.
+        """
         self.symbol_table = {
             "R0": 0, "R1": 1 ,"R2": 2, "R3": 3, "R4": 4, "R5": 5, "R6": 6,
             "R7": 7, "R8": 8, "R9": 9, "R10": 10, "R11": 11, "R12": 12, 
@@ -25,15 +27,19 @@ class SymbolTable:
         self.next_empty_memory = self.DEFAULT_START_MEM_ADDR
         
     def addEntry(self, symbol: str, address: int) -> None:
+        """
+        adds <symbol, address> to the table
+        """
         self.symbol_table[symbol] = address
-    
-    def updateNextEmptyMemory(self):
-        self.next_empty_memory += 1
         
     def contains(self, symbol: str) -> bool:
+        """
+        checks if the table contains the given symbol.
+        """
         return symbol in self.symbol_table
         
     def getAddress(self, symbol: str) -> int:
+        """
+        returns the address associated with the symbol
+        """
         return self.symbol_table[symbol]
-
-            

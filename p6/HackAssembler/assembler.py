@@ -27,6 +27,10 @@ class HackAssembler:
         self.code = Code()
         
     def firstPass(self) -> None:
+        """
+        The first pass results in adding to the symbol table all the 
+        program’s label symbols, along with their corresponding values.
+        """
         counter = 0
         while self.parser.hasMoreLines():
             self.parser.advance()
@@ -36,9 +40,18 @@ class HackAssembler:
                 counter += 1
     
     def createAinstruction(self, value: int) -> str:
+        """
+        For each A_INSTRUCTION of type @xxx, create a string of sixteen
+        '0' and '1' characters during second pass.
+        """
         return "0" + format(value, '015b')
 
     def createCinstruction(self, dest: str, comp: str, jump: str) -> str:
+        """
+        For each C_INSTRUCTION, assemble (concatenate) the binary codes 
+        into a string consisting of sixteen '0' and '1' characters 
+        during second pass.
+        """
         if "<" in comp or ">" in comp:
             return "101" + self.code.comp_dict[comp] + \
             self.code.dest_dict[dest] + self.code.jump_dict[jump]
@@ -46,6 +59,17 @@ class HackAssembler:
         self.code.dest_dict[dest] + self.code.jump_dict[jump]
         
     def secondPass(self) -> None:
+        """
+        The assembler goes again through the entire program.
+        Each time an A_INSTRUCTION with a symbolic reference is encountered, 
+        namely, @xxx, where xxx is a symbol and not a number, the assembler    
+        looks up xxx in the symbol table. If the symbol is found, the 
+        assembler replaces it with its numeric value and completes the
+        instruction’s translation. If the symbol is not found, then it must 
+        add new entry <xxx, value> to SymbolTable.
+        The RAM space designated for storing variables starts at 16 and is
+        incremented by 1 after each time a new variable is found in the code.
+        """
         self.parser.line_num = self.parser.DEFAULT_START_PROG_ADDR
         self.parser.curr_instruction = None
         while self.parser.hasMoreLines():
@@ -59,7 +83,7 @@ class HackAssembler:
                     if not self.symbol_table.contains(self.parser.symbol()):
                         self.symbol_table.addEntry(self.parser.symbol(),
                         self.symbol_table.next_empty_memory)
-                        self.symbol_table.updateNextEmptyMemory()
+                        self.symbol_table.next_empty_memory += 1
                     self.output_file.write(
                              self.createAinstruction(
                              int(self.symbol_table.getAddress(
@@ -72,6 +96,9 @@ class HackAssembler:
                            self.output_file.write("\n")
     
     def main(self) -> None:
+        """ 
+        Assembly-to-Binary Translation
+        """
         self.firstPass()
         self.secondPass()
 

@@ -9,6 +9,9 @@ binary codes.
 
 class Code:
     def __init__(self) -> None:
+        """
+        The binary mappings are specified in figure 6.2.
+        """
         self.dest_dict = {
             "": "000", "M": "001", "D": "010", "MD": "011", "A": "100", 
             "AM": "101", "AD": "110", "AMD": "111"
@@ -32,10 +35,19 @@ class Code:
         }
         
     def dest(self, mnemonic: str) -> str:
+        """
+        Returns 3 bits binary code of dest mnemonic
+        """
         return self.dest_dict[mnemonic]
         
     def comp(self, mnemonic: str) -> str:
+        """
+        Returns 7 bits binary code of comp mnemonic
+        """
         return self.comp_dict[mnemonic]
 
     def jump(self, mnemonic: str) -> str:
+        """
+        Returns 3 bits binary code of jump mnemonic
+        """
         return self.jump_dict[mnemonic]
