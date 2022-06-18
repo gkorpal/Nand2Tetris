@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+
+"""
+Author: Gaurish Korpal
+I used https://github.com/OrrMatzkin/nand2tetris-Minesweeper as reference 
+because I lack experience working with OOP and Python.
+"""
+
+import os
+import sys
+import typing 
+"""
+Type hints help combine function/method signature and header
+https://docs.python.org/3/library/typing.html
+"""
+from parser import Parser
+from code import Code
+from symboltable import SymbolTable
+
+    
+class HackAssembler:
+    def __init__(self, input_file: typing.TextIO, output_file: typing.TextIO) -> None:
+        self.input_file = input_file
+        self.output_file = output_file
+        self.parser = Parser(input_file)
+        self.symbol_table = SymbolTable()
+        self.code = Code()
+        
+    def firstPass(self) -> None:
+        counter = 0
+        while self.parser.hasMoreLines():
+            self.parser.advance()
+            if self.parser.instructionType() == self.parser.L_INSTRUCTION:
+                self.symbol_table.addEntry(self.parser.symbol(), counter)
+            else:
+                counter += 1
+    
+    def createAinstruction(self, value: int) -> str:
+        return "0" + format(value, '015b')
+
+    def createCinstruction(self, dest: str, comp: str, jump: str) -> str:
+        if "<" in comp or ">" in comp:
+            return "101" + self.code.comp_dict[comp] + \
+            self.code.dest_dict[dest] + self.code.jump_dict[jump]
+        return "111" + self.code.comp_dict[comp] + \
+        self.code.dest_dict[dest] + self.code.jump_dict[jump]
+        
+    def secondPass(self) -> None:
+        self.parser.line_num = self.parser.DEFAULT_START_PROG_ADDR
+        self.parser.curr_instruction = None
+        while self.parser.hasMoreLines():
+            self.parser.advance()
+            if self.parser.instructionType() == self.parser.A_INSTRUCTION:
+                if self.parser.symbol().isnumeric():
+                     self.output_file.write(
+                     self.createAinstruction(int(self.parser.symbol())))
+                     self.output_file.write("\n")
+                else:
+                    if not self.symbol_table.contains(self.parser.symbol()):
+                        self.symbol_table.addEntry(self.parser.symbol(),
+                        self.symbol_table.next_empty_memory)
+                        self.symbol_table.updateNextEmptyMemory()
+                    self.output_file.write(
+                             self.createAinstruction(
+                             int(self.symbol_table.getAddress(
+                             self.parser.symbol()))))
+                    self.output_file.write("\n")
+            elif self.parser.instructionType() == self.parser.C_INSTRUCTION:
+                           self.output_file.write(
+                           self.createCinstruction(self.parser.dest(),
+                           self.parser.comp(), self.parser.jump()))
+                           self.output_file.write("\n")
+    
+    def main(self) -> None:
+        self.firstPass()
+        self.secondPass()
+
+
+if __name__ == '__main__':
+    """
+    Code within this block won’t run unless the module is executed in the 
+    top-level environment. Putting as few statements as possible in the 
+    block below can improve code clarity and correctness. 
+    https://docs.python.org/3/library/__main__.html#idiomatic-usage
+    """
+    if not len(sys.argv) == 2:
+        sys.exit("Invalid usage, please use: ./assembler.py <input path>")
+    argument_path = os.path.abspath(sys.argv[1])
+    if os.path.isdir(argument_path):
+        files_to_assemble = [
+            os.path.join(argument_path, filename)
+            for filename in os.listdir(argument_path)]
+    else:
+        files_to_assemble = [argument_path]
+    for input_path in files_to_assemble:
+        filename, extension = os.path.splitext(input_path)
+        if extension.lower() != ".asm":
+            continue
+        output_path = filename + ".hack"
+        with open(input_path, 'r') as input_file, \
+                open(output_path, 'w') as output_file:
+                assembler = HackAssembler(input_file, output_file)
+                assembler.main()
+
