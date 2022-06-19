@@ -95,20 +95,16 @@ class HackAssembler:
                            self.parser.comp(), self.parser.jump()))
                            self.output_file.write("\n")
     
-    def main(self) -> None:
-        """ 
-        Assembly-to-Binary Translation
-        """
-        self.firstPass()
-        self.secondPass()
 
-
-if __name__ == '__main__':
-    """
-    Code within this block won’t run unless the module is executed in the 
-    top-level environment. Putting as few statements as possible in the 
-    block below can improve code clarity and correctness. 
-    https://docs.python.org/3/library/__main__.html#idiomatic-usage
+def main() -> None:
+    """ 
+    The Hack assembler accepts a single command-line argument "Prog.asm". 
+    The file name may contain a file path. 
+    If no path is specified then the assembler operates on the current folder.
+    The assembler creates an output file named "Prog.hack" and writes the 
+    translated binary instructions into it.
+    The output file is created in the same folder as the input file.
+    If there is a file by this name in the folder, it will be overwritten.
     """
     if not len(sys.argv) == 2:
         sys.exit("Invalid usage, please use: ./assembler.py <input path>")
@@ -127,5 +123,16 @@ if __name__ == '__main__':
         with open(input_path, 'r') as input_file, \
                 open(output_path, 'w') as output_file:
                 assembler = HackAssembler(input_file, output_file)
-                assembler.main()
+                assembler.firstPass()
+                assembler.secondPass()
+
+if __name__ == '__main__':
+    """
+    Code within this block won’t run unless the module is executed in the 
+    top-level environment. Putting as few statements as possible in the 
+    block below can improve code clarity and correctness. 
+    https://docs.python.org/3/library/__main__.html#idiomatic-usage
+    """
+    main()
+    
 
