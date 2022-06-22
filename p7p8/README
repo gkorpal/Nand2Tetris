@@ -1,18 +1,28 @@
 Dependency tree:
 
-VMTranslator_basic (bootstraping code not generated)
+VMTranslator_basic (bootstrapping code not generated)
 └── translator_basic.py
     ├── parser.py
     └── codewrites_basic.py
     
 $ cd VMTranslator_basic
 $ chmod +x *
-$ ./translator_basic.py ../add
-$ ./assembler.py ../max
-$ ./assembler.py ../rect
-$ ./assembler.py ../pong
+$ ./translator_basic.py ../SimpleAdd
+$ ./translator_basic.py ../StackTest
+$ ./translator_basic.py ../BasicTest
+$ ./translator_basic.py ../PointerTest
+$ ./translator_basic.py ../StaticTest
+$ ./translator_basic.py ../BasicLoop
+$ ./translator_basic.py ../FibonacciSeries
+$ ./translator_basic.py ../SimpleFunction
 
-VMTranslator (bootstraping code generated)
+
+VMTranslator (bootstrapping code generated)
 └── translator.py
     ├── parser.py
     └── codewrites.py
+
+$ cd VMTranslator
+$ chmod +x *
+$ ./translator.py ../FibonacciElement
+$ ./translator.py ../StaticsTest
