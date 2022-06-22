@@ -3,7 +3,7 @@ Dependency tree:
 VMTranslator_basic (bootstrapping code not generated)
 └── translator_basic.py
     ├── parser.py
-    └── codewrites_basic.py
+    └── codewriter_basic.py
     
 $ cd VMTranslator_basic
 $ chmod +x *
@@ -20,7 +20,7 @@ $ ./translator_basic.py ../SimpleFunction
 VMTranslator (bootstrapping code generated)
 └── translator.py
     ├── parser.py
-    └── codewrites.py
+    └── codewriter.py
 
 $ cd VMTranslator
 $ chmod +x *
