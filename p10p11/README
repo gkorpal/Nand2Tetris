@@ -1,7 +1,7 @@
 Dependency tree:
 
 JackCompiler.py
-├── SymbolTable.py
+├── SymbolTable.py (extension of JackAnalyzer.py)
 └── CompilationEngine.py
-    ├── VMWriter.py/JackAnalyzer.py
+    ├── VMWriter.py
     └── JackTokenizer.py
