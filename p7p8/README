@@ -6,9 +6,12 @@ VMTranslator_basic (bootstrapping code not generated)
     └── codewriter_basic.py
 
 
-\$ cd VMTranslator_basic
+ $ cd VMTranslator_basic
+ 
 $ chmod +x *
+
 $ ./translator_basic.py ../SimpleAdd
+
 $ ./translator_basic.py ../StackTest
 $ ./translator_basic.py ../BasicTest
 $ ./translator_basic.py ../PointerTest
