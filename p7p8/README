@@ -6,18 +6,24 @@ VMTranslator_basic (bootstrapping code not generated)
     └── codewriter_basic.py
 
 
- $ cd VMTranslator_basic
+$ cd VMTranslator_basic
  
 $ chmod +x *
 
 $ ./translator_basic.py ../SimpleAdd
 
 $ ./translator_basic.py ../StackTest
+
 $ ./translator_basic.py ../BasicTest
+
 $ ./translator_basic.py ../PointerTest
+
 $ ./translator_basic.py ../StaticTest
+
 $ ./translator_basic.py ../BasicLoop
+
 $ ./translator_basic.py ../FibonacciSeries
+
 $ ./translator_basic.py ../SimpleFunction
 
 
@@ -28,6 +34,9 @@ VMTranslator (bootstrapping code generated)
     
  
 $ cd VMTranslator
+
 $ chmod +x *
+
 $ ./translator.py ../FibonacciElement
+
 $ ./translator.py ../StaticsTest
