@@ -5,7 +5,7 @@ VMTranslator_basic (bootstrapping code not generated)
     ├── parser.py
     └── codewriter_basic.py
 
-
+````
 $ cd VMTranslator_basic
 $ chmod +x *
 $ ./translator_basic.py ../SimpleAdd
@@ -16,7 +16,7 @@ $ ./translator_basic.py ../StaticTest
 $ ./translator_basic.py ../BasicLoop
 $ ./translator_basic.py ../FibonacciSeries
 $ ./translator_basic.py ../SimpleFunction
-
+````
 
 VMTranslator (bootstrapping code generated)
 └── translator.py
