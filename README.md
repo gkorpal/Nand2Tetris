@@ -24,7 +24,7 @@ $ chmod +x JackCompiler
 
 The Hack computer is based on Harvard architecture (two separate address spaces), unlike most multi-purpose computers based on von Neumann architecture (single address space for storing both programs and data).
 
-The Jack language is based on Java ([object-based](https://en.wikipedia.org/wiki/Object-based_language) instead of [object-oriented](https://en.wikipedia.org/wiki/Object-oriented_programming)) but the compiler is written in Python (dynamically-typed interpreted).
+The Jack language is based on Java ([object-based](https://en.wikipedia.org/wiki/Object-based_language) instead of object-oriented) but the compiler is written in Python (dynamically-typed interpreted).
 
 ![compile](compiler.png)
 
