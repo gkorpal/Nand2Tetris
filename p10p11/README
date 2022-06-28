@@ -1,7 +1,9 @@
+This program doesn't work. I gave up.
+
 Dependency tree:
 
-JackCompiler.py
-├── SymbolTable.py (extension of JackAnalyzer.py)
-└── CompilationEngine.py
-    ├── VMWriter.py
-    └── JackTokenizer.py
+compiler.py
+└── engine.py
+    ├── writer.py
+    ├── tables.py
+    └── tokenizer.py
